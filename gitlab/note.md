@@ -22,3 +22,21 @@ git remote set-url origin ssh://git@172.25.91.66/eueip/test.git
 
 vm
 git clone ssh://git@10.0.2.15:22/eueip/test.git
+
+
+
+-----------------------------------------------
+RAM CPU 設置
+
+vi /etc/gitlab/gitlab.rb
+unicorn['worker_processes'] = 2
+
+docker exec -it gitlab gitlab-ctl reconfigure
+docker exec -it gitlab gitlab-ctl restart
+
+
+
+------------------------------------
+
+# 參考 docker => gitlab + runner
+https://eandev.com/post/devops/gitlab-and-runner-on-same-host-using-docker/
