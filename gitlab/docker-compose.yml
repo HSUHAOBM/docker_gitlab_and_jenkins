@@ -7,17 +7,23 @@ services:
     container_name: gitlab-ce
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost'
+              external_url 'http://172.25.202.38/'
     ports:
-      - '8081:80'
-      - '8443:443'
-      - '8022:22'
+      - '80:80'
+      - '443:443'
+      - '22:22'
     volumes:
       - /data/config:/etc/gitlab
       - /data/logs:/var/log/gitlab
       - /data/data:/var/opt/gitlab
     networks:
       - gitlab
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "2"
+
   # gitlab-runner:
   #   image: gitlab/gitlab-runner:alpine
   #   container_name: gitlab-runner
